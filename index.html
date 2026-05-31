@@ -364,7 +364,7 @@
                 </div>
 
                 <!-- Bloc 2 : Les Lots en jeu (Hauteur responsive dynamique par Flexbox) -->
-                <div class="main-panel card-prizes bg-white border border-slate-200 p-4 rounded-3xl shadow-sm flex flex-col justify-center relative overflow-hidden transition-all duration-300">
+                <div id="panel-prizes" class="main-panel card-prizes bg-white border border-slate-200 p-4 rounded-3xl shadow-sm flex flex-col justify-center relative overflow-hidden transition-all duration-300">
                     <div class="absolute -right-6 -top-6 text-slate-100/40 text-7xl font-black pointer-events-none select-none">
                         <i class="fa-solid fa-gift"></i>
                     </div>
@@ -379,7 +379,7 @@
                 </div>
 
                 <!-- Bloc 3 : Les Partenaires / Sponsors (Hauteur responsive dynamique par Flexbox) -->
-                <div class="main-panel card-sponsors bg-white border border-slate-200 p-4 rounded-3xl shadow-sm flex flex-col justify-center relative overflow-hidden transition-all duration-300">
+                <div id="panel-sponsors" class="main-panel card-sponsors bg-white border border-slate-200 p-4 rounded-3xl shadow-sm flex flex-col justify-center relative overflow-hidden transition-all duration-300">
                     <div class="absolute -right-6 -top-6 text-slate-100/40 text-7xl font-black pointer-events-none select-none">
                         <i class="fa-solid fa-heart"></i>
                     </div>
@@ -394,7 +394,7 @@
                 </div>
 
                 <!-- Bloc 4 : Statistiques déroulantes & Logo de l'Association dynamique -->
-                <div class="main-panel card-stats bg-white border border-slate-200 p-4 rounded-3xl shadow-sm flex-grow flex flex-col justify-between transition-all duration-300">
+                <div id="panel-stats" class="main-panel card-stats bg-white border border-slate-200 p-4 rounded-3xl shadow-sm flex-grow flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-2">
                             <span class="text-[10px] font-extrabold text-indigo-600 uppercase tracking-widest">Suivi des tirages</span>
@@ -487,20 +487,35 @@
                             </div>
                         </div>
 
-                        <!-- 3 colonnes de lots -->
-                        <div class="grid grid-cols-3 gap-4 h-[180px]">
+                        <!-- Étapes actives : défaut + override par partie -->
+                        <div class="bg-white border border-slate-200 rounded-xl p-3 mb-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[11px] font-extrabold text-slate-600 uppercase tracking-wide">Étapes jouées</span>
+                                <span class="text-[10px] text-slate-400" id="levels-scope-label"></span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2" id="levels-checkboxes-row">
+                                <!-- Rempli dynamiquement -->
+                            </div>
+                            <div class="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-[10px] text-slate-400">Appliquer uniquement à cette partie ?</span>
+                                <input type="checkbox" id="levels-override-toggle" onchange="toggleGameOverrideFromEditor(this.checked)" class="w-4 h-4 text-blue-600 rounded cursor-pointer">
+                            </div>
+                        </div>
+
+                        <!-- 3 colonnes de lots (masquées si étape désactivée) -->
+                        <div class="grid grid-cols-3 gap-4 h-[180px]" id="prizes-columns-grid">
                             <!-- Quine -->
-                            <div class="bg-white p-3 rounded-xl border border-slate-200 flex flex-col h-full overflow-hidden">
+                            <div id="prize-col-quine" class="bg-white p-3 rounded-xl border border-slate-200 flex flex-col h-full overflow-hidden">
                                 <span class="text-xs font-extrabold text-slate-700 tracking-wide pb-2 border-b border-slate-100 mb-2 shrink-0">Lots quine</span>
                                 <div class="space-y-2 overflow-y-auto flex-grow pr-1" id="quine-items-container"></div>
                             </div>
                             <!-- Double -->
-                            <div class="bg-white p-3 rounded-xl border border-slate-200 flex flex-col h-full overflow-hidden">
+                            <div id="prize-col-double" class="bg-white p-3 rounded-xl border border-slate-200 flex flex-col h-full overflow-hidden">
                                 <span class="text-xs font-extrabold text-slate-700 tracking-wide pb-2 border-b border-slate-100 mb-2 shrink-0">Lots double quine</span>
                                 <div class="space-y-2 overflow-y-auto flex-grow pr-1" id="double-items-container"></div>
                             </div>
                             <!-- Plein -->
-                            <div class="bg-white p-3 rounded-xl border border-slate-200 flex flex-col h-full overflow-hidden">
+                            <div id="prize-col-plein" class="bg-white p-3 rounded-xl border border-slate-200 flex flex-col h-full overflow-hidden">
                                 <span class="text-xs font-extrabold text-slate-700 tracking-wide pb-2 border-b border-slate-100 mb-2 shrink-0">Lots carton plein</span>
                                 <div class="space-y-2 overflow-y-auto flex-grow pr-1" id="plein-items-container"></div>
                             </div>
@@ -610,6 +625,27 @@
                                 <i class="fa-solid fa-volume-high text-blue-500" id="sound-icon-settings"></i> Effets sonores (bips)
                             </span>
                             <input type="checkbox" id="sound-toggle" onchange="toggleSound(this.checked)" class="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500 cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Bloc Panneaux visibles -->
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl shrink-0">
+                        <h4 class="font-extrabold text-slate-800 text-xs flex items-center gap-2 mb-2">
+                            <i class="fa-solid fa-table-columns text-indigo-500"></i> Panneaux visibles (côté droit)
+                        </h4>
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200 space-y-1.5 text-xs">
+                            <label class="flex items-center justify-between cursor-pointer">
+                                <span class="font-bold text-slate-700">🎁 Lots</span>
+                                <input type="checkbox" id="panel-toggle-prizes" onchange="togglePanel('prizes', this.checked)" class="w-4 h-4 text-blue-600 rounded cursor-pointer">
+                            </label>
+                            <label class="flex items-center justify-between cursor-pointer">
+                                <span class="font-bold text-slate-700">🤝 Partenaires</span>
+                                <input type="checkbox" id="panel-toggle-sponsors" onchange="togglePanel('sponsors', this.checked)" class="w-4 h-4 text-blue-600 rounded cursor-pointer">
+                            </label>
+                            <label class="flex items-center justify-between cursor-pointer">
+                                <span class="font-bold text-slate-700">📊 Statistiques</span>
+                                <input type="checkbox" id="panel-toggle-stats" onchange="togglePanel('stats', this.checked)" class="w-4 h-4 text-blue-600 rounded cursor-pointer">
+                            </label>
                         </div>
                     </div>
 
@@ -768,6 +804,8 @@
             ],
             currentGameIndex: 0,
             currentLevel: "quine", // quine, double, plein
+            defaultEnabledLevels: ["quine", "double", "plein"], // étapes actives par défaut
+            visiblePanels: { prizes: true, sponsors: true, stats: true }, // panneaux droite
             sponsors: ["Boulangerie Patisserie Le Moulin", "Garage Central Auto", "Boucherie Sanzot", "Coiffure & Beauté Émilie"],
             logo: "", // Base64
             theme: "pastel", // pastel, light, dark, spatial
@@ -925,6 +963,15 @@
                     // Fallbacks pour les nouveaux champs de l'association
                     if (appState.associationName === undefined) appState.associationName = "Votre Association";
                     if (appState.associationSubtext === undefined) appState.associationSubtext = "Organisateur officiel";
+                    // Fallbacks nouveaux champs étapes et panneaux
+                    if (!appState.defaultEnabledLevels) appState.defaultEnabledLevels = ["quine", "double", "plein"];
+                    if (!appState.visiblePanels) appState.visiblePanels = { prizes: true, sponsors: true, stats: true };
+                    if (appState.visiblePanels.prizes === undefined) appState.visiblePanels.prizes = true;
+                    if (appState.visiblePanels.sponsors === undefined) appState.visiblePanels.sponsors = true;
+                    if (appState.visiblePanels.stats === undefined) appState.visiblePanels.stats = true;
+                    appState.series.forEach(game => {
+                        if (game.enabledLevels === undefined) game.enabledLevels = null;
+                    });
 
                     if (!appState.series || appState.series.length === 0) {
                         resetToDefaultState();
@@ -953,11 +1000,14 @@
                             quine: ["Panier gourmand du Terroir", "Bon d'achat de 20€ chez le Boulanger"],
                             double: ["Bon d'achat de 50€ au Supermarché local"],
                             plein: ["Téléviseur LED Smart TV 120cm", "Cafetière Nespresso Krups"]
-                        }
+                        },
+                        enabledLevels: null
                     }
                 ],
                 currentGameIndex: 0,
                 currentLevel: "quine",
+                defaultEnabledLevels: ["quine", "double", "plein"],
+                visiblePanels: { prizes: true, sponsors: true, stats: true },
                 sponsors: ["Boulangerie Patisserie Le Moulin", "Garage Central Auto", "Boucherie Sanzot", "Coiffure & Beauté Émilie"],
                 logo: existingLogo, 
                 theme: "pastel",
@@ -1504,24 +1554,28 @@
         }
 
         // --- ACTIONS DU LOTO (SUIVANT, DUPLIQUER, RESETS) ---
+        function getEnabledLevels(gameIndex) {
+            const game = appState.series[gameIndex !== undefined ? gameIndex : appState.currentGameIndex];
+            return (game && game.enabledLevels) ? game.enabledLevels : (appState.defaultEnabledLevels || ["quine", "double", "plein"]);
+        }
+
         function nextGameStep() {
             const currentLvl = String(appState.currentLevel).toLowerCase().trim();
-            if (currentLvl === 'quine') {
+            const enabled = getEnabledLevels();
+            const order = ['quine', 'double', 'plein'];
+            const currentIdx = order.indexOf(currentLvl);
+            // Cherche la prochaine étape activée après l'actuelle
+            const nextLvl = order.slice(currentIdx + 1).find(l => enabled.includes(l));
+
+            if (nextLvl) {
                 saveStateToUndoStack();
-                appState.currentLevel = 'double';
+                appState.currentLevel = nextLvl;
                 uiState.viewGameIndex = parseInt(appState.currentGameIndex || 0);
-                uiState.viewLevel = 'double';
+                uiState.viewLevel = nextLvl;
                 saveStateToLocalStorage();
                 refreshAllUI();
-                showToast("Étape suivante : Double quine !", "success");
-            } else if (currentLvl === 'double') {
-                saveStateToUndoStack();
-                appState.currentLevel = 'plein';
-                uiState.viewGameIndex = parseInt(appState.currentGameIndex || 0);
-                uiState.viewLevel = 'plein';
-                saveStateToLocalStorage();
-                refreshAllUI();
-                showToast("Étape suivante : Carton plein !", "success");
+                const labels = { quine: 'Quine', double: 'Double Quine', plein: 'Carton Plein' };
+                showToast("Étape suivante : " + labels[nextLvl] + " !", "success");
             } else {
                 askConfirmation(
                     "Le carton plein est terminé. Voulez-vous clore cette partie de loto et créer/passer à la suivante ?",
@@ -1535,13 +1589,16 @@
                                 id: Date.now(),
                                 name: `Partie ${nextIndex}`,
                                 drawnNumbers: [],
-                                prizes: { quine: [], double: [], plein: [] }
+                                prizes: { quine: [], double: [], plein: [] },
+                                enabledLevels: null
                             });
                             appState.currentGameIndex = appState.series.length - 1;
                         }
-                        appState.currentLevel = 'quine';
+                        const newEnabled = getEnabledLevels(appState.currentGameIndex);
+                        const firstLevel = ['quine','double','plein'].find(l => newEnabled.includes(l)) || 'quine';
+                        appState.currentLevel = firstLevel;
                         uiState.viewGameIndex = parseInt(appState.currentGameIndex || 0);
-                        uiState.viewLevel = 'quine';
+                        uiState.viewLevel = firstLevel;
                         uiState.editorGameIndex = appState.currentGameIndex;
 
                         saveStateToLocalStorage();
@@ -2435,9 +2492,14 @@
             renderPrizeTypeInputs('quine');
             renderPrizeTypeInputs('double');
             renderPrizeTypeInputs('plein');
+            renderLevelsUI();
 
             renderSponsors();
             refreshLogoDisplay();
+
+            // Sync panneaux
+            applyPanelVisibility();
+            setTimeout(syncRightColHeight, 30);
 
             if (elementIdToFocus) {
                 const targetInput = document.getElementById(elementIdToFocus);
@@ -2451,12 +2513,122 @@
         }
 
         window.onload = () => {
-            setTimeout(syncRightColHeight, 50);
             loadStateFromLocalStorage();
             applyThemeToBody();
             refreshAllUI();
+            applyPanelVisibility();
+            setTimeout(syncRightColHeight, 80);
         };
 
+        // ── GESTION ÉTAPES PAR PARTIE ──────────────────────────────────────────────
+        function renderLevelsUI() {
+            const idx = uiState.editorGameIndex;
+            const game = appState.series[idx];
+            if (!game) return;
+            const isOverridden = !!game.enabledLevels;
+            const effective = game.enabledLevels || appState.defaultEnabledLevels || ["quine","double","plein"];
+            const labels = { quine: '🎯 Quine', double: '🎯🎯 Double Quine', plein: '👑 Carton Plein' };
+
+            // Label scope
+            const scopeLabel = document.getElementById('levels-scope-label');
+            if (scopeLabel) scopeLabel.textContent = isOverridden ? 'Override actif pour cette partie' : 'Défaut (toutes les parties)';
+
+            // Override toggle
+            const overrideTgl = document.getElementById('levels-override-toggle');
+            if (overrideTgl) overrideTgl.checked = isOverridden;
+
+            // Cases à cocher
+            const row = document.getElementById('levels-checkboxes-row');
+            if (!row) return;
+            row.innerHTML = ['quine','double','plein'].map(l => `
+                <label class="flex items-center gap-1.5 cursor-pointer bg-slate-50 rounded-lg px-2 py-1.5 border border-slate-200">
+                    <input type="checkbox" ${effective.includes(l) ? 'checked' : ''}
+                        onchange="toggleLevelFromEditor('${l}', this.checked)"
+                        class="w-3.5 h-3.5 text-blue-600 rounded cursor-pointer shrink-0">
+                    <span class="text-[11px] font-bold text-slate-700">${labels[l]}</span>
+                </label>`).join('');
+
+            // Masquer/afficher colonnes de lots
+            ['quine','double','plein'].forEach(l => {
+                const col = document.getElementById('prize-col-' + l);
+                if (col) col.classList.toggle('hidden', !effective.includes(l));
+            });
+            // Ajuster grid selon nombre de colonnes visibles
+            const visibleCount = ['quine','double','plein'].filter(l => effective.includes(l)).length;
+            const grid = document.getElementById('prizes-columns-grid');
+            if (grid) {
+                grid.className = grid.className.replace(/grid-cols-\d/, 'grid-cols-' + (visibleCount || 1));
+            }
+        }
+
+        function toggleLevelFromEditor(level, enabled) {
+            const idx = uiState.editorGameIndex;
+            const game = appState.series[idx];
+            if (!game) return;
+            const isOverridden = !!game.enabledLevels;
+            // Modifier le bon tableau (override ou défaut)
+            if (isOverridden) {
+                if (enabled) {
+                    if (!game.enabledLevels.includes(level)) game.enabledLevels.push(level);
+                } else {
+                    const next = game.enabledLevels.filter(l => l !== level);
+                    if (next.length === 0) { showToast("Il faut au moins une étape active.", "warning"); renderLevelsUI(); return; }
+                    game.enabledLevels = next;
+                }
+            } else {
+                if (!appState.defaultEnabledLevels) appState.defaultEnabledLevels = ["quine","double","plein"];
+                if (enabled) {
+                    if (!appState.defaultEnabledLevels.includes(level)) appState.defaultEnabledLevels.push(level);
+                } else {
+                    const next = appState.defaultEnabledLevels.filter(l => l !== level);
+                    if (next.length === 0) { showToast("Il faut au moins une étape active.", "warning"); renderLevelsUI(); return; }
+                    appState.defaultEnabledLevels = next;
+                }
+            }
+            saveStateToLocalStorage();
+            renderLevelsUI();
+        }
+
+        function toggleGameOverrideFromEditor(enabled) {
+            const idx = uiState.editorGameIndex;
+            const game = appState.series[idx];
+            if (!game) return;
+            if (enabled) {
+                game.enabledLevels = [...(appState.defaultEnabledLevels || ["quine","double","plein"])];
+            } else {
+                game.enabledLevels = null;
+            }
+            saveStateToLocalStorage();
+            renderLevelsUI();
+        }
+
+        // Stubs pour rétrocompatibilité (plus utilisés mais garder au cas où)
+        function renderOverrideLevels() { renderLevelsUI(); }
+        function toggleDefaultLevel(level, enabled) { toggleLevelFromEditor(level, enabled); }
+
+        // ── GESTION PANNEAUX DROITE ────────────────────────────────────────────────
+        function togglePanel(panel, visible) {
+            if (!appState.visiblePanels) appState.visiblePanels = { prizes: true, sponsors: true, stats: true };
+            appState.visiblePanels[panel] = visible;
+            saveStateToLocalStorage();
+            applyPanelVisibility();
+            setTimeout(syncRightColHeight, 50);
+        }
+
+        function applyPanelVisibility() {
+            const panels = appState.visiblePanels || { prizes: true, sponsors: true, stats: true };
+            ['prizes', 'sponsors', 'stats'].forEach(p => {
+                const el = document.getElementById('panel-' + p);
+                if (el) el.classList.toggle('hidden', !panels[p]);
+            });
+            // Sync checkboxes
+            ['prizes', 'sponsors', 'stats'].forEach(p => {
+                const cb = document.getElementById('panel-toggle-' + p);
+                if (cb) cb.checked = panels[p] !== false;
+            });
+        }
+
+        // ── SYNC HAUTEUR DROITE ────────────────────────────────────────────────────
         function syncRightColHeight() {
             const leftPanel = document.querySelector('.col-span-8.main-panel');
             const rightCol = document.getElementById('right-col');
@@ -2467,7 +2639,8 @@
             }
         }
         window.addEventListener('resize', syncRightColHeight);
-        document.addEventListener('fullscreenchange', syncRightColHeight);
+        document.addEventListener('fullscreenchange', () => setTimeout(syncRightColHeight, 100));
+
     </script>
 </body>
 </html>
