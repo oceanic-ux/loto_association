@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LotoAsso Pro - Grand Écran Interactif</title>
     <!-- Tailwind CSS pour un design propre et fluide -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
     <!-- FontAwesome pour des icônes explicites -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts pour la lisibilité sur écran et projecteur -->
@@ -26,13 +26,17 @@
         .projection-grid {
             display: grid;
             grid-template-columns: repeat(10, minmax(0, 1fr));
-            grid-template-rows: repeat(9, minmax(0, 1fr)); /* Verrouillage strict des lignes pour éviter tout décalage */
+            grid-template-rows: repeat(9, minmax(0, 1fr));
             gap: 0.5rem;
             width: 100%;
             height: 100%;
             max-width: 900px;
             max-height: 520px;
             margin: auto;
+        }
+        .projection-grid.grid-transposed {
+            grid-template-columns: repeat(9, minmax(0, 1fr));
+            grid-template-rows: repeat(10, minmax(0, 1fr));
         }
         /* Effet de pulsation doux pour le dernier numéro tiré */
         .pulse-soft {
@@ -649,6 +653,23 @@
                         </div>
                     </div>
 
+                    <!-- Bloc Orientation de la grille -->
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl shrink-0">
+                        <h4 class="font-extrabold text-slate-800 text-xs flex items-center gap-2 mb-2">
+                            <i class="fa-solid fa-table text-violet-500"></i> Orientation de la grille
+                        </h4>
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200 text-xs space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="grid-orientation" value="rows" onchange="setGridOrientation(false)" class="w-3.5 h-3.5 text-blue-600 cursor-pointer">
+                                <span class="font-bold text-slate-700">En lignes <span class="text-slate-400 font-normal">(1 2 3 … dans la 1ʳᵉ ligne)</span></span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="grid-orientation" value="cols" onchange="setGridOrientation(true)" class="w-3.5 h-3.5 text-blue-600 cursor-pointer">
+                                <span class="font-bold text-slate-700">En colonnes <span class="text-slate-400 font-normal">(1 2 3 … dans la 1ʳᵉ colonne)</span></span>
+                            </label>
+                        </div>
+                    </div>
+
                     <!-- Bloc Sponsors -->
                     <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl flex-grow flex flex-col overflow-hidden max-h-[140px]">
                         <h4 class="font-extrabold text-slate-800 text-xs flex items-center gap-2 mb-1.5 shrink-0">
@@ -742,7 +763,7 @@
             </div>
 
             <!-- Grille Thermique -->
-            <div class="overflow-y-auto flex-grow mb-4 grid grid-cols-10 gap-1.5 p-3 bg-slate-50 rounded-2xl max-h-[35vh]" id="stats-grid">
+            <div class="overflow-y-auto flex-grow mb-4 grid gap-1.5 p-3 bg-slate-50 rounded-2xl max-h-[35vh]" id="stats-grid">
                 <!-- Rempli dynamiquement -->
             </div>
 
@@ -806,6 +827,7 @@
             currentLevel: "quine", // quine, double, plein
             defaultEnabledLevels: ["quine", "double", "plein"], // étapes actives par défaut
             visiblePanels: { prizes: true, sponsors: true, stats: true }, // panneaux droite
+            gridTransposed: false, // orientation de la grille
             sponsors: ["Boulangerie Patisserie Le Moulin", "Garage Central Auto", "Boucherie Sanzot", "Coiffure & Beauté Émilie"],
             logo: "", // Base64
             theme: "pastel", // pastel, light, dark, spatial
@@ -969,6 +991,7 @@
                     if (appState.visiblePanels.prizes === undefined) appState.visiblePanels.prizes = true;
                     if (appState.visiblePanels.sponsors === undefined) appState.visiblePanels.sponsors = true;
                     if (appState.visiblePanels.stats === undefined) appState.visiblePanels.stats = true;
+                    if (appState.gridTransposed === undefined) appState.gridTransposed = false;
                     appState.series.forEach(game => {
                         if (game.enabledLevels === undefined) game.enabledLevels = null;
                     });
@@ -1008,6 +1031,7 @@
                 currentLevel: "quine",
                 defaultEnabledLevels: ["quine", "double", "plein"],
                 visiblePanels: { prizes: true, sponsors: true, stats: true },
+                gridTransposed: false,
                 sponsors: ["Boulangerie Patisserie Le Moulin", "Garage Central Auto", "Boucherie Sanzot", "Coiffure & Beauté Émilie"],
                 logo: existingLogo, 
                 theme: "pastel",
@@ -1264,7 +1288,27 @@
                 lastNum = filteredDrawn.length > 0 ? filteredDrawn[filteredDrawn.length - 1].val : null;
             }
 
-            for (let i = 1; i <= 90; i++) {
+            // Ordre d'affichage selon orientation
+            const transposed = !!appState.gridTransposed;
+            container.classList.toggle('grid-transposed', transposed);
+
+            // En mode normal : 1..90 (10 cols × 9 rows, numéros par ligne)
+            // En mode transposé : on réordonne pour que les numéros se lisent par colonne
+            // Colonne j (0..8), ligne i (0..9) → numéro = j*10 + i + 1
+            let displayOrder = [];
+            if (!transposed) {
+                for (let i = 1; i <= 90; i++) displayOrder.push(i);
+            } else {
+                // 9 colonnes × 10 lignes : parcours ligne par ligne de la grille
+                // ligne i, colonne j → numéro = j*10 + i + 1  (colonne j contient 1+j*10 .. 10+j*10)
+                for (let row = 0; row < 10; row++) {
+                    for (let col = 0; col < 9; col++) {
+                        displayOrder.push(col * 10 + row + 1);
+                    }
+                }
+            }
+
+            for (const i of displayOrder) {
                 const isDrawn = drawnSet.has(i);
                 const isLast = (lastNum === i);
                 
@@ -2275,7 +2319,21 @@
                 if (counts[i] < minCount) minCount = counts[i];
             }
 
-            for (let i = 1; i <= 90; i++) {
+            // Même orientation que la grille principale
+            const transposed = !!appState.gridTransposed;
+            gridContainer.className = gridContainer.className.replace(/grid-cols-\d+/, '');
+            gridContainer.classList.add(transposed ? 'grid-cols-9' : 'grid-cols-10');
+
+            let statsOrder = [];
+            if (!transposed) {
+                for (let i = 1; i <= 90; i++) statsOrder.push(i);
+            } else {
+                for (let row = 0; row < 10; row++)
+                    for (let col = 0; col < 9; col++)
+                        statsOrder.push(col * 10 + row + 1);
+            }
+
+            for (const i of statsOrder) {
                 const cell = document.createElement('div');
                 const count = counts[i];
                 
@@ -2499,6 +2557,7 @@
 
             // Sync panneaux
             applyPanelVisibility();
+            syncGridOrientationUI();
             setTimeout(syncRightColHeight, 30);
 
             if (elementIdToFocus) {
@@ -2605,6 +2664,22 @@
         // Stubs pour rétrocompatibilité (plus utilisés mais garder au cas où)
         function renderOverrideLevels() { renderLevelsUI(); }
         function toggleDefaultLevel(level, enabled) { toggleLevelFromEditor(level, enabled); }
+
+
+        // ── ORIENTATION DE LA GRILLE ───────────────────────────────────────────────
+        function setGridOrientation(transposed) {
+            appState.gridTransposed = !!transposed;
+            saveStateToLocalStorage();
+            syncGridOrientationUI();
+            renderMainGrid();
+        }
+
+        function syncGridOrientationUI() {
+            const val = appState.gridTransposed ? 'cols' : 'rows';
+            document.querySelectorAll('input[name="grid-orientation"]').forEach(r => {
+                r.checked = (r.value === val);
+            });
+        }
 
         // ── GESTION PANNEAUX DROITE ────────────────────────────────────────────────
         function togglePanel(panel, visible) {
