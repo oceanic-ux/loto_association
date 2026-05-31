@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <link rel="manifest" href="manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LotoAsso Pro - Grand Écran Interactif</title>
@@ -150,72 +151,154 @@
             }
         }
 
-        /* THÈME CLAIR CONTRASTÉ */
+        /* ════════════════════════════════════════════════════════
+           THÈME 1 : SOLEIL (fond crème chaud, tons ambre/orange)
+           ════════════════════════════════════════════════════════ */
         body.theme-light {
-            background-color: #f8fafc;
-            color: #0f172a;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%);
+            color: #1c1006;
         }
         body.theme-light .main-panel {
-            background-color: #ffffff !important;
-            border-color: #cbd5e1 !important;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            background-color: #fffdf7 !important;
+            border-color: #fcd34d !important;
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.15);
         }
         body.theme-light .cell-inactive {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-color: #cbd5e1 !important;
-            color: #1e293b !important;
+            background-color: rgba(255, 251, 235, 0.95);
+            border-color: #fcd34d !important;
+            color: #78350f !important;
+        }
+        body.theme-light .cell-inactive:hover {
+            background-color: #fef3c7 !important;
+            border-color: #f59e0b !important;
+        }
+        body.theme-light select, body.theme-light input {
+            background-color: #fffbeb !important;
+            border-color: #fcd34d !important;
+            color: #78350f !important;
         }
 
-        /* THÈME FONCÉ CINÉMA */
+        /* ════════════════════════════════════════════════════════
+           THÈME 2 : FORÊT (fond vert sapin foncé, tons émeraude)
+           ════════════════════════════════════════════════════════ */
+        body.theme-forest {
+            background: linear-gradient(160deg, #052e16 0%, #14532d 60%, #166534 100%);
+            color: #dcfce7;
+        }
+        body.theme-forest .main-panel {
+            background-color: rgba(6, 45, 22, 0.85) !important;
+            border-color: #16a34a !important;
+            box-shadow: 0 4px 24px rgba(22, 163, 74, 0.2);
+        }
+        body.theme-forest .cell-inactive {
+            background-color: rgba(20, 83, 45, 0.7);
+            border-color: #15803d !important;
+            color: #86efac !important;
+            text-shadow: 0 0 6px rgba(34, 197, 94, 0.3);
+        }
+        body.theme-forest .cell-inactive:hover {
+            background-color: rgba(22, 101, 52, 0.9) !important;
+            border-color: #4ade80 !important;
+        }
+        body.theme-forest select, body.theme-forest input {
+            background-color: #052e16 !important;
+            color: #dcfce7 !important;
+            border-color: #16a34a !important;
+        }
+
+        /* ════════════════════════════════════════════════════════
+           THÈME 3 : NUIT BLEUE (fond ardoise foncé, tons bleu acier)
+           ════════════════════════════════════════════════════════ */
         body.theme-dark {
-            background-color: #0b0f19;
-            color: #f1f5f9;
+            background: linear-gradient(160deg, #020617 0%, #0f172a 50%, #0c1a35 100%);
+            color: #e2e8f0;
         }
         body.theme-dark .main-panel {
-            background-color: #1e293b !important;
-            border-color: #334155 !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            background-color: #0f1f3d !important;
+            border-color: #1d4ed8 !important;
+            box-shadow: 0 4px 24px rgba(29, 78, 216, 0.2);
         }
         body.theme-dark .cell-inactive {
-            background-color: rgba(30, 41, 59, 0.8);
-            border-color: #475569 !important;
-            color: #cbd5e1 !important;
+            background-color: rgba(15, 31, 61, 0.85);
+            border-color: #1e40af !important;
+            color: #93c5fd !important;
+        }
+        body.theme-dark .cell-inactive:hover {
+            background-color: rgba(30, 64, 175, 0.4) !important;
+            border-color: #60a5fa !important;
         }
         body.theme-dark select, body.theme-dark input {
-            background-color: #0f172a !important;
-            color: #f1f5f9 !important;
-            border-color: #334155 !important;
+            background-color: #020617 !important;
+            color: #e2e8f0 !important;
+            border-color: #1d4ed8 !important;
         }
 
-        /* THÈME DISTORSION SPATIALE (COSMIC) */
+        /* ════════════════════════════════════════════════════════
+           THÈME 4 : BORDEAUX (fond rouge bordeaux profond, tons rubis)
+           ════════════════════════════════════════════════════════ */
+        body.theme-bordeaux {
+            background: linear-gradient(150deg, #1a0008 0%, #3b0014 50%, #4c0519 100%);
+            color: #ffe4e6;
+        }
+        body.theme-bordeaux .main-panel {
+            background-color: rgba(30, 0, 12, 0.85) !important;
+            border-color: #be123c !important;
+            box-shadow: 0 4px 24px rgba(190, 18, 60, 0.25);
+        }
+        body.theme-bordeaux .cell-inactive {
+            background-color: rgba(59, 0, 20, 0.75);
+            border-color: #9f1239 !important;
+            color: #fda4af !important;
+            text-shadow: 0 0 6px rgba(244, 63, 94, 0.3);
+        }
+        body.theme-bordeaux .cell-inactive:hover {
+            background-color: rgba(136, 19, 55, 0.5) !important;
+            border-color: #fb7185 !important;
+        }
+        body.theme-bordeaux select, body.theme-bordeaux input {
+            background-color: #1a0008 !important;
+            color: #ffe4e6 !important;
+            border-color: #be123c !important;
+        }
+
+        /* ════════════════════════════════════════════════════════
+           THÈME 5 : AURORA (fond nuit violette, néon cyan/magenta)
+           ════════════════════════════════════════════════════════ */
         body.theme-spatial {
-            background-color: #040212;
-            color: #e0e7ff;
+            background: linear-gradient(170deg, #020019 0%, #0d0028 40%, #120038 70%, #06001a 100%);
+            color: #e8d5ff;
         }
         body.theme-spatial .main-panel {
-            background-color: rgba(15, 12, 41, 0.8) !important;
-            border-color: #4338ca !important;
-            box-shadow: 0 0 25px rgba(99, 102, 241, 0.25);
-            backdrop-filter: blur(8px);
+            background-color: rgba(8, 0, 32, 0.82) !important;
+            border-color: #7c3aed !important;
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.3), 0 0 60px rgba(6, 182, 212, 0.1);
+            backdrop-filter: blur(10px);
         }
         body.theme-spatial .cell-inactive {
-            background-color: rgba(30, 27, 75, 0.6);
-            border-color: #4f46e5 !important;
-            color: #c7d2fe !important;
-            text-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
-            box-shadow: inset 0 0 10px rgba(99, 102, 241, 0.1);
+            background-color: rgba(18, 0, 56, 0.65);
+            border-color: #6d28d9 !important;
+            color: #c4b5fd !important;
+            text-shadow: 0 0 10px rgba(167, 139, 250, 0.7);
+            box-shadow: inset 0 0 12px rgba(124, 58, 237, 0.15);
         }
         body.theme-spatial .cell-inactive:hover {
-            border-color: #818cf8 !important;
-            background-color: rgba(49, 46, 129, 0.7) !important;
+            border-color: #06b6d4 !important;
+            background-color: rgba(6, 182, 212, 0.12) !important;
+            text-shadow: 0 0 12px rgba(6, 182, 212, 0.8);
         }
         body.theme-spatial select, body.theme-spatial input {
-            background-color: #111033 !important;
-            color: #e0e7ff !important;
-            border-color: #4f46e5 !important;
+            background-color: #08001a !important;
+            color: #e8d5ff !important;
+            border-color: #7c3aed !important;
         }
 
-        /* Animation de fond rotative de la distorsion spatiale */
+        /* Fond aurora animé */
+        @keyframes aurora-shift {
+            0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); opacity: 0.6; }
+            33%  { transform: translate(-50%, -50%) rotate(120deg) scale(1.2); opacity: 0.8; }
+            66%  { transform: translate(-50%, -50%) rotate(240deg) scale(0.95); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); opacity: 0.6; }
+        }
         @keyframes cosmic-warp {
             0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
             50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.15); }
@@ -225,16 +308,132 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 250%;
-            height: 250%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, rgba(15, 12, 41, 0.01) 50%, transparent 80%);
-            animation: cosmic-warp 35s infinite linear;
+            width: 280%;
+            height: 280%;
+            background: 
+                radial-gradient(ellipse at 30% 40%, rgba(124, 58, 237, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 60%, rgba(6, 182, 212, 0.14) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 20%, rgba(236, 72, 153, 0.10) 0%, transparent 45%);
+            animation: aurora-shift 25s infinite linear;
             pointer-events: none;
             z-index: -1;
             display: none;
         }
         body.theme-spatial .cosmic-background {
             display: block;
+        }
+
+        /* ════════════════════════════════════════════════════════
+           THÈME 6 : MINUIT DORÉ (fond très sombre, accents or/ambre)
+           ════════════════════════════════════════════════════════ */
+        body.theme-gold {
+            background: linear-gradient(155deg, #0a0800 0%, #120f00 50%, #1a1500 100%);
+            color: #fef9c3;
+        }
+        body.theme-gold .main-panel {
+            background-color: rgba(15, 12, 0, 0.88) !important;
+            border-color: #b45309 !important;
+            box-shadow: 0 4px 28px rgba(180, 83, 9, 0.25), inset 0 1px 0 rgba(251, 191, 36, 0.08);
+        }
+        body.theme-gold .cell-inactive {
+            background-color: rgba(26, 21, 0, 0.8);
+            border-color: #92400e !important;
+            color: #fde68a !important;
+            text-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+        }
+        body.theme-gold .cell-inactive:hover {
+            background-color: rgba(120, 53, 15, 0.35) !important;
+            border-color: #f59e0b !important;
+            text-shadow: 0 0 14px rgba(251, 191, 36, 0.7);
+        }
+        body.theme-gold select, body.theme-gold input {
+            background-color: #0a0800 !important;
+            color: #fef9c3 !important;
+            border-color: #b45309 !important;
+        }
+
+        /* ══════════════════════════════════════════════════════════════
+           THÈMES — ÉLÉMENTS DYNAMIQUES : boule, tirés, titres, légende
+           ══════════════════════════════════════════════════════════════ */
+
+        /* Palette par thème : variables CSS pour éviter la répétition */
+        body.theme-pastel  { --c-last-bg:#f472b6; --c-last-border:#ec4899; --c-drawn-bg:#8b5cf6; --c-drawn-border:#7c3aed; --c-title1:#7c3aed; --c-title2:#d97706; --c-title3:#6d28d9; --c-legend-text:#64748b; --c-legend-bg:#f8fafc; --c-legend-border:#e2e8f0; --c-bar-bg:#f8fafc; --c-bar-border:#e2e8f0; --c-bar-text:#475569; --c-btn-bg:#f1f5f9; --c-btn-border:#e2e8f0; --c-btn-text:#475569; --c-saying-bg:#fdf4ff; --c-saying-border:#e9d5ff; --c-saying-text:#6b21a8; --c-logo-bg:#fdf4ff; --c-logo-border:#e9d5ff; }
+        body.theme-light   { --c-last-bg:#f59e0b; --c-last-border:#d97706; --c-drawn-bg:#d97706; --c-drawn-border:#b45309; --c-title1:#92400e; --c-title2:#b45309; --c-title3:#78350f; --c-legend-text:#78350f; --c-legend-bg:#fffbeb; --c-legend-border:#fcd34d; --c-bar-bg:#fffbeb; --c-bar-border:#fcd34d; --c-bar-text:#78350f; --c-btn-bg:#fef3c7; --c-btn-border:#fcd34d; --c-btn-text:#78350f; --c-saying-bg:#fef9e8; --c-saying-border:#fcd34d; --c-saying-text:#92400e; --c-logo-bg:#fffbeb; --c-logo-border:#fcd34d; }
+        body.theme-forest  { --c-last-bg:#16a34a; --c-last-border:#15803d; --c-drawn-bg:#166534; --c-drawn-border:#14532d; --c-title1:#86efac; --c-title2:#4ade80; --c-title3:#a7f3d0; --c-legend-text:#86efac; --c-legend-bg:rgba(6,45,22,0.6); --c-legend-border:#16a34a; --c-bar-bg:rgba(6,45,22,0.5); --c-bar-border:#16a34a; --c-bar-text:#86efac; --c-btn-bg:rgba(20,83,45,0.5); --c-btn-border:#15803d; --c-btn-text:#86efac; --c-saying-bg:rgba(6,45,22,0.7); --c-saying-border:#16a34a; --c-saying-text:#86efac; --c-logo-bg:rgba(6,45,22,0.6); --c-logo-border:#16a34a; }
+        body.theme-dark    { --c-last-bg:#2563eb; --c-last-border:#1d4ed8; --c-drawn-bg:#1e3a8a; --c-drawn-border:#1d4ed8; --c-title1:#93c5fd; --c-title2:#60a5fa; --c-title3:#bfdbfe; --c-legend-text:#93c5fd; --c-legend-bg:rgba(15,31,61,0.7); --c-legend-border:#1d4ed8; --c-bar-bg:rgba(15,31,61,0.6); --c-bar-border:#1d4ed8; --c-bar-text:#93c5fd; --c-btn-bg:rgba(30,58,138,0.4); --c-btn-border:#1e40af; --c-btn-text:#93c5fd; --c-saying-bg:rgba(15,31,61,0.8); --c-saying-border:#1d4ed8; --c-saying-text:#bfdbfe; --c-logo-bg:rgba(15,31,61,0.7); --c-logo-border:#1d4ed8; }
+        body.theme-bordeaux{ --c-last-bg:#be123c; --c-last-border:#9f1239; --c-drawn-bg:#881337; --c-drawn-border:#9f1239; --c-title1:#fda4af; --c-title2:#fb7185; --c-title3:#fecdd3; --c-legend-text:#fda4af; --c-legend-bg:rgba(30,0,12,0.7); --c-legend-border:#9f1239; --c-bar-bg:rgba(30,0,12,0.6); --c-bar-border:#9f1239; --c-bar-text:#fda4af; --c-btn-bg:rgba(59,0,20,0.5); --c-btn-border:#9f1239; --c-btn-text:#fda4af; --c-saying-bg:rgba(30,0,12,0.8); --c-saying-border:#be123c; --c-saying-text:#fecdd3; --c-logo-bg:rgba(30,0,12,0.7); --c-logo-border:#9f1239; }
+        body.theme-spatial { --c-last-bg:#7c3aed; --c-last-border:#6d28d9; --c-drawn-bg:#4c1d95; --c-drawn-border:#6d28d9; --c-title1:#c4b5fd; --c-title2:#06b6d4; --c-title3:#e9d5ff; --c-legend-text:#c4b5fd; --c-legend-bg:rgba(8,0,32,0.7); --c-legend-border:#7c3aed; --c-bar-bg:rgba(8,0,32,0.6); --c-bar-border:#7c3aed; --c-bar-text:#c4b5fd; --c-btn-bg:rgba(18,0,56,0.5); --c-btn-border:#6d28d9; --c-btn-text:#c4b5fd; --c-saying-bg:rgba(8,0,32,0.8); --c-saying-border:#7c3aed; --c-saying-text:#e9d5ff; --c-logo-bg:rgba(8,0,32,0.7); --c-logo-border:#7c3aed; }
+        body.theme-gold    { --c-last-bg:#b45309; --c-last-border:#92400e; --c-drawn-bg:#78350f; --c-drawn-border:#92400e; --c-title1:#fde68a; --c-title2:#f59e0b; --c-title3:#fef9c3; --c-legend-text:#fde68a; --c-legend-bg:rgba(15,12,0,0.7); --c-legend-border:#b45309; --c-bar-bg:rgba(15,12,0,0.6); --c-bar-border:#b45309; --c-bar-text:#fde68a; --c-btn-bg:rgba(26,21,0,0.5); --c-btn-border:#92400e; --c-btn-text:#fde68a; --c-saying-bg:rgba(15,12,0,0.8); --c-saying-border:#b45309; --c-saying-text:#fef9c3; --c-logo-bg:rgba(15,12,0,0.7); --c-logo-border:#b45309; }
+
+        /* ── Dernière boule (grand cercle) ── */
+        #display-last-number {
+            background-color: var(--c-last-bg) !important;
+            border-color: var(--c-last-border) !important;
+            color: #ffffff !important;
+        }
+
+        /* ── Cellules tirées dans la grille ── */
+        .cell-drawn-theme {
+            background-color: var(--c-drawn-bg) !important;
+            border-color: var(--c-drawn-border) !important;
+            color: #ffffff !important;
+        }
+        /* ── Dernière boule dans la grille ── */
+        .cell-last-theme {
+            background-color: var(--c-last-bg) !important;
+            border-color: var(--c-last-border) !important;
+            color: #ffffff !important;
+        }
+
+        /* ── Titres des panneaux droits ── */
+        #panel-prizes  .panel-title { color: var(--c-title1) !important; }
+        #panel-sponsors .panel-title { color: var(--c-title2) !important; }
+        #panel-stats   .panel-title { color: var(--c-title3) !important; }
+
+        /* ── Phrase / saying ── */
+        #display-saying-wrap {
+            background-color: var(--c-saying-bg) !important;
+            border-color: var(--c-saying-border) !important;
+        }
+        #display-saying {
+            color: var(--c-saying-text) !important;
+        }
+
+        /* ── Barre d'actions du bas (légende + boutons) ── */
+        .bottom-bar {
+            border-color: var(--c-bar-border) !important;
+            background-color: transparent;
+        }
+        .legend-text { color: var(--c-legend-text) !important; }
+        .legend-box-drawn {
+            background-color: var(--c-drawn-bg) !important;
+            border-color: var(--c-drawn-border) !important;
+        }
+        .legend-box-last {
+            background-color: var(--c-last-bg) !important;
+            border-color: var(--c-last-border) !important;
+        }
+        .legend-box-inactive {
+            background-color: var(--c-legend-bg) !important;
+            border-color: var(--c-legend-border) !important;
+        }
+        .bottom-btn {
+            background-color: var(--c-btn-bg) !important;
+            border-color: var(--c-btn-border) !important;
+            color: var(--c-btn-text) !important;
+        }
+
+        /* ── Logo / asso bloc ── */
+        .logo-wrap {
+            background-color: var(--c-logo-bg) !important;
+            border-color: var(--c-logo-border) !important;
+        }
+
+        /* ── Compteur boules tirées ── */
+        .drawn-count-wrap {
+            background-color: var(--c-btn-bg) !important;
+            border-color: var(--c-btn-border) !important;
+            color: var(--c-btn-text) !important;
         }
     </style>
 </head>
@@ -266,7 +465,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl text-xs font-bold text-slate-600">
+                    <div class="drawn-count-wrap px-4 py-2 rounded-xl text-xs font-bold border">
                         Boules tirées : <span id="regie-count" class="text-emerald-600 font-extrabold">0</span> / 90
                     </div>
                 </div>
@@ -301,27 +500,27 @@
                 </div>
 
                 <!-- Barre d'actions du bas (Sous la grille) -->
-                <div class="flex justify-between items-center border-t border-slate-100 pt-3 shrink-0">
-                    <div class="flex items-center gap-3 text-xs text-slate-400">
+                <div class="flex justify-between items-center border-t pt-3 shrink-0 bottom-bar">
+                    <div class="flex items-center gap-3 text-xs legend-text">
                         <span class="flex items-center gap-1.5">
-                            <span class="w-3.5 h-3.5 rounded bg-emerald-600 border border-emerald-700"></span> Numéro tiré
+                            <span class="w-3.5 h-3.5 rounded legend-box-drawn border"></span> Numéro tiré
                         </span>
                         <span class="flex items-center gap-1.5">
-                            <span class="w-3.5 h-3.5 rounded bg-amber-500 border border-amber-600 pulse-soft"></span> Dernier tiré
+                            <span class="w-3.5 h-3.5 rounded legend-box-last border pulse-soft"></span> Dernier tiré
                         </span>
                         <span class="flex items-center gap-1.5">
-                            <span class="w-3.5 h-3.5 rounded bg-white border border-slate-200"></span> Non tiré
+                            <span class="w-3.5 h-3.5 rounded legend-box-inactive border"></span> Non tiré
                         </span>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <button onclick="openSettingsModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl text-xs transition-all flex items-center gap-1.5 border border-slate-200 shadow-sm">
+                        <button onclick="openSettingsModal()" class="bottom-btn font-bold py-2 px-4 rounded-xl text-xs transition-all flex items-center gap-1.5 border shadow-sm">
                             <i class="fa-solid fa-gear text-blue-500"></i> Configuration
                         </button>
-                        <button onclick="openStatsModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl text-xs transition-all flex items-center gap-1.5 border border-slate-200 shadow-sm">
+                        <button onclick="openStatsModal()" class="bottom-btn font-bold py-2 px-4 rounded-xl text-xs transition-all flex items-center gap-1.5 border shadow-sm">
                             <i class="fa-solid fa-chart-column text-indigo-500"></i> Statistiques
                         </button>
-                        <button id="btn-fullscreen" onclick="toggleFullscreen()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl text-xs transition-all flex items-center gap-1.5 border border-slate-200 shadow-sm">
+                        <button id="btn-fullscreen" onclick="toggleFullscreen()" class="bottom-btn font-bold py-2 px-4 rounded-xl text-xs transition-all flex items-center gap-1.5 border shadow-sm">
                             <i class="fa-solid fa-expand text-emerald-600"></i> Plein écran
                         </button>
                     </div>
@@ -352,7 +551,7 @@
                     </div>
 
                     <!-- Phrase humoristique du dernier numéro -->
-                    <div class="bg-slate-50 p-2 rounded-xl border border-slate-100 shrink-0 text-center">
+                    <div id="display-saying-wrap" class="bg-slate-50 p-2 rounded-xl border border-slate-100 shrink-0 text-center">
                         <span id="display-saying" class="text-xs font-bold text-slate-600 italic block truncate">Aucun numéro tiré</span>
                     </div>
 
@@ -373,7 +572,7 @@
                         <i class="fa-solid fa-gift"></i>
                     </div>
                     <div class="h-full flex flex-col justify-between">
-                        <span class="text-[10px] font-extrabold text-blue-600 uppercase tracking-widest block shrink-0 mb-1">Lots à gagner</span>
+                        <span class="text-[10px] font-extrabold panel-title text-blue-600 uppercase tracking-widest block shrink-0 mb-1">Lots à gagner</span>
                         <div class="flex-grow overflow-hidden relative no-scrollbar" id="prizes-scroller-container">
                             <div class="space-y-1 py-1" id="prizes-scroller-inner">
                                 <!-- Rempli en Javascript -->
@@ -388,7 +587,7 @@
                         <i class="fa-solid fa-heart"></i>
                     </div>
                     <div class="h-full flex flex-col justify-between">
-                        <span class="text-[10px] font-extrabold text-amber-600 uppercase tracking-widest block shrink-0 mb-1">Partenaires officiels</span>
+                        <span class="text-[10px] font-extrabold panel-title text-amber-600 uppercase tracking-widest block shrink-0 mb-1">Partenaires officiels</span>
                         <div class="flex-grow overflow-hidden relative no-scrollbar" id="sponsors-scroller-container">
                             <div class="space-y-1 py-1" id="sponsors-scroller-inner">
                                 <!-- Rempli en Javascript -->
@@ -401,7 +600,7 @@
                 <div id="panel-stats" class="main-panel card-stats bg-white border border-slate-200 p-4 rounded-3xl shadow-sm flex-grow flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-2">
-                            <span class="text-[10px] font-extrabold text-indigo-600 uppercase tracking-widest">Suivi des tirages</span>
+                            <span class="text-[10px] font-extrabold panel-title text-indigo-600 uppercase tracking-widest">Suivi des tirages</span>
                             <span class="text-[9px] text-slate-400 font-bold">Données cumulées</span>
                         </div>
                         <div class="space-y-2 pt-1">
@@ -417,7 +616,7 @@
                     </div>
 
                     <!-- Bloc Logo de l'association grand format (Texte éditable et persistant) -->
-                    <div class="flex items-center gap-4 bg-slate-50/50 p-2 rounded-2xl border border-slate-100 shrink-0 mt-2">
+                    <div class="logo-wrap flex items-center gap-4 p-2 rounded-2xl border shrink-0 mt-2">
                         <div class="relative w-12 h-12 bg-white border border-slate-200 rounded-xl overflow-hidden shrink-0 flex items-center justify-center">
                             <img id="display-logo" src="https://placehold.co/150x150/ffffff/475569?text=Logo" alt="Association logo" class="w-full h-full object-contain">
                         </div>
@@ -547,12 +746,41 @@
                         <h4 class="font-extrabold text-slate-800 text-xs flex items-center gap-2 mb-2.5">
                             <i class="fa-solid fa-palette text-blue-500"></i> Thème d'affichage de la régie
                         </h4>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="changeTheme('pastel')" id="theme-btn-pastel" class="py-1.5 px-2 rounded-lg text-xs font-extrabold border bg-white text-slate-700 shadow-sm transition-all">Pastel (Déf.)</button>
-                            <button onclick="changeTheme('light')" id="theme-btn-light" class="py-1.5 px-2 rounded-lg text-xs font-extrabold border bg-white text-slate-700 shadow-sm transition-all">Clair</button>
-                            <button onclick="changeTheme('dark')" id="theme-btn-dark" class="py-1.5 px-2 rounded-lg text-xs font-extrabold border bg-white text-slate-700 shadow-sm transition-all">Sombre</button>
-                            <button onclick="changeTheme('spatial')" id="theme-btn-spatial" class="py-1.5 px-2 rounded-lg text-xs font-extrabold border bg-white text-slate-700 shadow-sm transition-all flex items-center justify-center gap-1">
-                                <i class="fa-solid fa-user-astronaut text-indigo-505 animate-pulse"></i> Distorsion
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="changeTheme('pastel')" id="theme-btn-pastel"
+                                class="py-2 px-1 rounded-xl text-[10px] font-extrabold border-2 transition-all flex flex-col items-center gap-1 shadow-sm"
+                                style="background:#fdf4ff;border-color:#e9d5ff;color:#6b21a8">
+                                🌸 Pastel
+                            </button>
+                            <button onclick="changeTheme('light')" id="theme-btn-light"
+                                class="py-2 px-1 rounded-xl text-[10px] font-extrabold border-2 transition-all flex flex-col items-center gap-1 shadow-sm"
+                                style="background:#fffbeb;border-color:#fcd34d;color:#92400e">
+                                ☀️ Soleil
+                            </button>
+                            <button onclick="changeTheme('forest')" id="theme-btn-forest"
+                                class="py-2 px-1 rounded-xl text-[10px] font-extrabold border-2 transition-all flex flex-col items-center gap-1 shadow-sm"
+                                style="background:#052e16;border-color:#16a34a;color:#86efac">
+                                🌲 Forêt
+                            </button>
+                            <button onclick="changeTheme('dark')" id="theme-btn-dark"
+                                class="py-2 px-1 rounded-xl text-[10px] font-extrabold border-2 transition-all flex flex-col items-center gap-1 shadow-sm"
+                                style="background:#0f172a;border-color:#1d4ed8;color:#93c5fd">
+                                🌃 Nuit bleue
+                            </button>
+                            <button onclick="changeTheme('bordeaux')" id="theme-btn-bordeaux"
+                                class="py-2 px-1 rounded-xl text-[10px] font-extrabold border-2 transition-all flex flex-col items-center gap-1 shadow-sm"
+                                style="background:#3b0014;border-color:#be123c;color:#fda4af">
+                                🍷 Bordeaux
+                            </button>
+                            <button onclick="changeTheme('spatial')" id="theme-btn-spatial"
+                                class="py-2 px-1 rounded-xl text-[10px] font-extrabold border-2 transition-all flex flex-col items-center gap-1 shadow-sm"
+                                style="background:#0d0028;border-color:#7c3aed;color:#c4b5fd">
+                                🌌 Aurora
+                            </button>
+                            <button onclick="changeTheme('gold')" id="theme-btn-gold"
+                                class="py-2 px-1 rounded-xl text-[10px] font-extrabold border-2 transition-all flex flex-col items-center gap-1 col-span-3 shadow-sm"
+                                style="background:#120f00;border-color:#b45309;color:#fde68a">
+                                ✨ Minuit Doré
                             </button>
                         </div>
                     </div>
@@ -1139,29 +1367,33 @@
 
         function applyThemeToBody() {
             const body = document.body;
-            body.classList.remove('theme-pastel', 'theme-light', 'theme-dark', 'theme-spatial');
-            
-            const themes = ['pastel', 'light', 'dark', 'spatial'];
+            const allThemes = ['theme-pastel','theme-light','theme-dark','theme-spatial','theme-forest','theme-bordeaux','theme-gold'];
+            body.classList.remove(...allThemes);
+
+            const themes = ['pastel','light','dark','spatial','forest','bordeaux','gold'];
             themes.forEach(theme => {
                 const btn = document.getElementById(`theme-btn-${theme}`);
                 if (btn) {
                     if (appState.theme === theme) {
-                        btn.className = "py-1.5 px-2 rounded-lg text-xs font-black border-2 bg-blue-600 border-blue-700 text-white shadow-md transform scale-105 transition-all";
+                        btn.style.outline = '3px solid white';
+                        btn.style.transform = 'scale(1.07)';
+                        btn.style.boxShadow = '0 0 0 4px rgba(255,255,255,0.3)';
                     } else {
-                        btn.className = "py-1.5 px-2 rounded-lg text-xs font-bold border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm transition-all";
+                        btn.style.outline = '';
+                        btn.style.transform = '';
+                        btn.style.boxShadow = '';
                     }
                 }
             });
 
-            if (appState.theme === 'light') {
-                body.classList.add('theme-light');
-            } else if (appState.theme === 'dark') {
-                body.classList.add('theme-dark');
-            } else if (appState.theme === 'spatial') {
-                body.classList.add('theme-spatial');
-            } else {
-                body.classList.add('theme-pastel');
-            }
+            const t = appState.theme;
+            if      (t === 'light')    body.classList.add('theme-light');
+            else if (t === 'dark')     body.classList.add('theme-dark');
+            else if (t === 'spatial')  body.classList.add('theme-spatial');
+            else if (t === 'forest')   body.classList.add('theme-forest');
+            else if (t === 'bordeaux') body.classList.add('theme-bordeaux');
+            else if (t === 'gold')     body.classList.add('theme-gold');
+            else                       body.classList.add('theme-pastel');
         }
 
         // --- FILIGRANE ET ARRIÈRE PLAN DE LA GRILLE ---
@@ -1319,11 +1551,19 @@
                 // Configuration de la classe d'inactivité avec bordure fixe de 2px
                 let inactiveStylesClass = 'cell-inactive bg-white/80 border-slate-200 text-slate-700 hover:bg-slate-50/90 hover:scale-105 duration-200';
                 if (appState.watermarkEnabled && appState.logo) {
-                    inactiveStylesClass = 'cell-inactive cell-transparent hover:bg-black/5 hover:scale-105 duration-200';
-                    if (appState.theme === 'dark') {
-                        inactiveStylesClass = 'cell-inactive cell-transparent border-slate-500 text-slate-100 hover:bg-white/10 hover:scale-105 duration-200';
-                    } else if (appState.theme === 'spatial') {
-                        inactiveStylesClass = 'cell-inactive cell-transparent border-indigo-500 text-indigo-200 hover:bg-indigo-500/10 hover:scale-105 duration-200';
+                    const t = appState.theme;
+                    if (t === 'dark') {
+                        inactiveStylesClass = 'cell-inactive cell-transparent border-blue-800 text-blue-200 hover:bg-blue-900/30 hover:scale-105 duration-200';
+                    } else if (t === 'spatial') {
+                        inactiveStylesClass = 'cell-inactive cell-transparent border-violet-600 text-violet-200 hover:bg-cyan-500/10 hover:scale-105 duration-200';
+                    } else if (t === 'forest') {
+                        inactiveStylesClass = 'cell-inactive cell-transparent border-green-700 text-green-300 hover:bg-green-800/30 hover:scale-105 duration-200';
+                    } else if (t === 'bordeaux') {
+                        inactiveStylesClass = 'cell-inactive cell-transparent border-rose-800 text-rose-300 hover:bg-rose-900/30 hover:scale-105 duration-200';
+                    } else if (t === 'gold') {
+                        inactiveStylesClass = 'cell-inactive cell-transparent border-amber-800 text-amber-300 hover:bg-amber-900/30 hover:scale-105 duration-200';
+                    } else if (t === 'light') {
+                        inactiveStylesClass = 'cell-inactive cell-transparent border-amber-300 text-amber-900 hover:bg-amber-100/30 hover:scale-105 duration-200';
                     } else {
                         inactiveStylesClass = 'cell-inactive cell-transparent border-slate-300 text-slate-800 hover:bg-black/5 hover:scale-105 duration-200';
                     }
@@ -1332,9 +1572,9 @@
                 // Utilisation rigoureuse de border-2 pour conserver des dimensions identiques et fixes en permanence
                 cell.className = `p-1 rounded-2xl text-center font-extrabold transition-all text-xl flex items-center justify-center border-2 h-full shadow-sm select-none ${
                     isLast 
-                        ? 'bg-amber-500 border-amber-600 text-white text-2xl font-black scale-105 pulse-soft z-20' 
+                        ? 'cell-last-theme text-2xl font-black scale-105 pulse-soft z-20' 
                         : isDrawn
-                            ? 'bg-emerald-600 border-emerald-700 text-white font-extrabold z-10'
+                            ? 'cell-drawn-theme font-extrabold z-10'
                             : inactiveStylesClass + ' z-10'
                 } ${isConsulting ? 'opacity-85' : 'cursor-pointer'}`;
                 
